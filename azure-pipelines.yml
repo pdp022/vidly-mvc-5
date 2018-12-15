@@ -8,6 +8,12 @@ queue:
   - java
 
 steps:
+- task: NuGetToolInstaller@0
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+    
 - task: VSBuild@1
   displayName: 'Build solution **\*.sln'
 
