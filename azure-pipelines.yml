@@ -2,17 +2,22 @@ resources:
 - repo: self
 queue:
   name: Hosted VS2017
-  demands: java
+  demands: 
+  - msbuild
+  - visualstudio
+  - java
 
 steps:
+- task: VSBuild@1
+  displayName: 'Build solution **\*.sln'
+
+
 - task: SonarSource.sonarqube.15B84CA1-B62F-4A2A-A403-89B77A063157.SonarQubePrepare@4
   displayName: 'Prepare analysis on SonarQube'
   inputs:
     SonarQube: so
 
     projectKey: 'pdp022_vidly-mvc-5'
-
-    projectName: vid
 
 
 - task: SonarSource.sonarqube.6D01813A-9589-4B15-8491-8164AEB38055.SonarQubeAnalyze@4
